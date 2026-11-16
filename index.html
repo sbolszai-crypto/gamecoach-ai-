@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101426">
+  <title>GAMECOACH AI</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: Arial, sans-serif;
+      background: #101426;
+      color: white;
+    }
+    header { text-align: center; margin: 35px 0; }
+    h1 { color: #63e6be; font-size: 32px; }
+    .card {
+      background: #202a43;
+      padding: 20px;
+      border-radius: 16px;
+      margin: 16px 0;
+    }
+    button {
+      background: #63e6be;
+      color: #101426;
+      border: 0;
+      padding: 14px;
+      border-radius: 10px;
+      font-weight: bold;
+      width: 100%;
+      font-size: 16px;
+    }
+    select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      margin: 12px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎮 GAMECOACH AI</h1>
+    <p>Il tuo coach gaming intelligente</p>
+  </header>
+
+  <div class="card">
+    <h2>🎯 Scegli il tuo gioco</h2>
+    <select id="game">
+      <option>Fortnite</option>
+      <option>Call of Duty</option>
+      <option>Minecraft</option>
+      <option>Brawl Stars</option>
+      <option>Free Fire</option>
+      <option>Altro</option>
+    </select>
+    <button onclick="coach()">Inizia ad allenarti</button>
+  </div>
+
+  <div class="card">
+    <h2>🤖 AI Coach</h2>
+    <p id="answer">Ciao! Sono il tuo coach. Scegli un gioco per iniziare!</p>
+  </div>
+
+  <script>
+    function coach() {
+      const game = document.getElementById("game").value;
+      document.getElementById("answer").textContent =
+        "Benvenuto! Prepariamoci a migliorare su " + game +
+        ". Primo consiglio: allenati con costanza e analizza i tuoi errori!";
+    }
+  </script>
+</body>
+    </html>

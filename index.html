@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -9,33 +8,31 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#0b1020;color:#f4f6ff;font-family:Arial,sans-serif}
-header{padding:22px;background:#131c32;border-bottom:1px solid #283653;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:22px;font-weight:900;color:#63e6be}
-.logo span{color:white}
+header{padding:22px;background:#131c32;border-bottom:1px solid #283653;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.logo{font-size:22px;font-weight:900;color:#63e6be}.logo span{color:white}
 header small{color:#9eacc8}
 main{max-width:1000px;margin:auto;padding:20px}
 .welcome{padding:25px;border-radius:20px;background:linear-gradient(120deg,#193c52,#25305c);margin-bottom:20px}
-h1{font-size:27px;margin:0 0 10px}
-p{color:#bdc8df;line-height:1.5}
+h1{font-size:27px;margin:0 0 10px}p{color:#bdc8df;line-height:1.5}
 .card{background:#151f35;border:1px solid #293955;border-radius:17px;padding:20px;margin-bottom:17px}
 h2{font-size:19px;margin-top:0}
 select,input{width:100%;padding:14px;border-radius:10px;border:1px solid #40506c;background:#0d1629;color:white;font-size:16px;margin:8px 0}
 button{background:#63e6be;color:#0b1020;border:0;padding:13px 17px;border-radius:10px;font-weight:bold;font-size:15px;cursor:pointer}
-button.secondary{background:#293955;color:white}
-button:active{transform:scale(.98)}
+button.secondary{background:#293955;color:white}button:active{transform:scale(.98)}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .stat{background:#202c45;padding:15px;border-radius:12px}
 .stat strong{font-size:24px;color:#63e6be;display:block}
-.chat{height:210px;overflow:auto;background:#0d1629;border-radius:12px;padding:13px;margin:12px 0}
-.message{padding:10px;margin:7px 0;border-radius:10px;background:#202c45}
+.chat{height:260px;overflow:auto;background:#0d1629;border-radius:12px;padding:13px;margin:12px 0}
+.message{padding:11px;margin:7px 0;border-radius:10px;background:#202c45;line-height:1.5;white-space:pre-wrap}
 .user{background:#174a47}
-.row{display:flex;gap:8px}
-.row input{min-width:0}
+.row{display:flex;gap:8px}.row input{min-width:0}
 nav{display:flex;gap:8px;overflow:auto;padding:12px 20px;background:#10182b}
-nav button{white-space:nowrap}
-section{scroll-margin-top:20px}
+nav button{white-space:nowrap}section{scroll-margin-top:20px}
+.coach-settings{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hint{font-size:13px;color:#9eacc8;margin-top:4px}
 footer{text-align:center;color:#71809c;padding:25px;font-size:12px}
 @media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}main{padding:30px}}
+@media(max-width:520px){header{align-items:flex-start;flex-direction:column}.coach-settings{grid-template-columns:1fr}.row{align-items:stretch}.row button{padding-left:13px;padding-right:13px}}
 </style>
 </head>
 <body>
@@ -43,14 +40,12 @@ footer{text-align:center;color:#71809c;padding:25px;font-size:12px}
 <div class="logo">🎮 GAMECOACH <span>AI</span></div>
 <small>YOUR GAMING PARTNER</small>
 </header>
-
 <nav>
 <button onclick="go('home')">🏠 Home</button>
 <button class="secondary" onclick="go('coach')">🤖 Coach</button>
 <button class="secondary" onclick="go('training')">🏋️ Training</button>
 <button class="secondary" onclick="go('stats')">📊 Statistiche</button>
 </nav>
-
 <main>
 <section id="home">
 <div class="welcome">
@@ -58,24 +53,13 @@ footer{text-align:center;color:#71809c;padding:25px;font-size:12px}
 <p>Il tuo spazio personale per allenarti, migliorare e vincere.</p>
 <button onclick="go('coach')">Inizia con il coach →</button>
 </div>
-
 <div class="card">
 <h2>🎮 Il tuo gioco</h2>
 <select id="game" onchange="saveGame()">
-<option>Fortnite</option>
-<option>Call of Duty</option>
-<option>Brawl Stars</option>
-<option>Free Fire</option>
-<option>Minecraft</option>
-<option>Roblox</option>
-<option>Rocket League</option>
-<option>EA Sports FC</option>
-<option>PUBG Mobile</option>
-<option>Altro</option>
+<option>Fortnite</option><option>Call of Duty</option><option>Brawl Stars</option><option>Free Fire</option><option>Minecraft</option><option>Roblox</option><option>Rocket League</option><option>EA Sports FC</option><option>PUBG Mobile</option><option>Altro</option>
 </select>
 <p id="selected">Gioco selezionato: Fortnite</p>
 </div>
-
 <div class="card">
 <h2>⚡ Il tuo riepilogo</h2>
 <div class="grid">
@@ -86,19 +70,23 @@ footer{text-align:center;color:#71809c;padding:25px;font-size:12px}
 </div>
 </div>
 </section>
-
 <section id="coach" class="card">
-<h2>🤖 AI Coach</h2>
-<p>Scrivi una domanda al tuo coach. Questa prima versione usa consigli integrati, non un'intelligenza artificiale online.</p>
-<div class="chat" id="chat">
-<div class="message">Ciao! Sono GameCoach. Quale abilità vuoi migliorare oggi?</div>
+<h2>🤖 AI Coach – Il tuo allenatore personale</h2>
+<p>Imposta il tuo profilo e scrivi cosa vuoi migliorare. Il Coach adatta i suggerimenti alle tue risposte e al gioco scelto.</p>
+<div class="coach-settings">
+<div><label for="level">Il tuo livello</label><select id="level"><option>Principiante</option><option>Intermedio</option><option>Avanzato</option></select></div>
+<div><label for="focus">Cosa vuoi migliorare?</label><select id="focus"><option value="generale">Un po' tutto</option><option value="mira">Mira e precisione</option><option value="movimento">Movimento e riflessi</option><option value="strategia">Strategia e decisioni</option><option value="costruzioni">Costruzioni</option><option value="squadra">Gioco di squadra</option><option value="mentalita">Concentrazione e calma</option></select></div>
+</div>
+<p class="hint">Puoi cambiare queste impostazioni in qualsiasi momento.</p>
+<div class="chat" id="chat" aria-live="polite">
+<div class="message">Ciao! Sono il tuo GameCoach. 🎮\nDimmi cosa ti mette in difficoltà: preparerò un piccolo allenamento adatto al tuo gioco e al tuo livello.</div>
 </div>
 <div class="row">
-<input id="question" placeholder="Es. Come posso migliorare?" onkeydown="if(event.key==='Enter')send()">
+<input id="question" placeholder="Es. Perdo spesso gli scontri..." onkeydown="if(event.key==='Enter')send()">
 <button onclick="send()">Invia</button>
 </div>
+<p class="hint">Nota: questa versione offre coaching personalizzato con regole integrate e funziona senza account o costi. Non è ancora un'AI online e non analizza automaticamente le partite.</p>
 </section>
-
 <section id="training" class="card">
 <h2>🏋️ Centro allenamento</h2>
 <p>Scegli un esercizio e completa la tua sessione.</p>
@@ -110,7 +98,6 @@ Allenamento: concentrazione e precisione
 </div>
 <p id="trainingResult"></p>
 </section>
-
 <section id="stats" class="card">
 <h2>📊 I tuoi progressi</h2>
 <p>Le tue sessioni vengono salvate su questo dispositivo.</p>
@@ -121,15 +108,10 @@ Allenamento: concentrazione e precisione
 <button class="secondary" onclick="resetStats()">Azzera statistiche</button>
 </section>
 </main>
-
-<footer>GAMECOACH AI · Prima versione · Progetto personale</footer>
-
+<footer>GAMECOACH AI · Coach personalizzato · Progetto personale</footer>
 <script>
 let data=JSON.parse(localStorage.getItem('gcdata')||'{"sessions":0,"minutes":0,"goals":0}');
-function save(){
-localStorage.setItem('gcdata',JSON.stringify(data));
-update();
-}
+function save(){localStorage.setItem('gcdata',JSON.stringify(data));update()}
 function update(){
 document.getElementById('sessions').textContent=data.sessions;
 document.getElementById('sessions2').textContent=data.sessions;
@@ -142,42 +124,66 @@ let game=document.getElementById('game').value;
 localStorage.setItem('gcgame',game);
 document.getElementById('selected').textContent='Gioco selezionato: '+game;
 }
+function coachReply(q){
+const game=document.getElementById('game').value;
+const level=document.getElementById('level').value;
+const focus=document.getElementById('focus').value;
+const s=q.toLowerCase();
+let topic=focus;
+if(/mira|precision|colp|spar/.test(s))topic='mira';
+else if(/costru|build|edit/.test(s))topic='costruzioni';
+else if(/moviment|rifless|veloc|schiv/.test(s))topic='movimento';
+else if(/strateg|posizion|decision|rotaz/.test(s))topic='strategia';
+else if(/squadra|team|compagno|comunic/.test(s))topic='squadra';
+else if(/ansia|nervos|tilt|concentr|calma/.test(s))topic='mentalita';
+let difficulty=level==='Principiante'?'Parti lentamente e punta prima alla precisione.':level==='Intermedio'?'Aumenta gradualmente la difficoltà e controlla i tuoi errori.':'Lavora sui dettagli: costanza, tempi e decisioni sotto pressione.';
+let advice='';
+if(topic==='mira') advice='🎯 ALLENAMENTO MIRA\\n1. Dedica 5 minuti a seguire un bersaglio senza sparare.\\n2. Fai 5 minuti di colpi controllati, senza avere fretta.\\n3. Dopo ogni scontro chiediti se hai sparato con calma.\\n'+difficulty;
+else if(topic==='costruzioni') advice='🧱 ALLENAMENTO COSTRUZIONI\\n1. Ripeti una sequenza semplice per 3 minuti.\\n2. Eseguila lentamente altre 3 volte senza errori.\\n3. Solo dopo prova ad aumentare la velocità.\\n'+difficulty;
+else if(topic==='movimento') advice='🏃 ALLENAMENTO MOVIMENTO\\n1. Per 3 minuti muoviti evitando di restare fermo.\\n2. Prova a usare coperture e cambi di direzione.\\n3. Rivedi un errore di movimento dopo la partita.\\n'+difficulty;
+else if(topic==='strategia') advice='🧠 ALLENAMENTO STRATEGIA\\n1. Prima di uno scontro individua una via di copertura.\\n2. Non entrare in un combattimento senza un piano di uscita.\\n3. Dopo la partita pensa a una decisione che potevi cambiare.\\n'+difficulty;
+else if(topic==='squadra') advice='🤝 ALLENAMENTO DI SQUADRA\\n1. Comunica posizione e intenzione in modo breve.\\n2. Resta abbastanza vicino ai compagni per aiutarli.\\n3. Dopo uno scontro concordate cosa ha funzionato.\\n'+difficulty;
+else if(topic==='mentalita') advice='🧘 ALLENAMENTO CONCENTRAZIONE\\n1. Prima della partita fai tre respiri lenti.\\n2. Concentrati su un solo obiettivo alla volta.\\n3. Se sbagli, fai una pausa breve e riparti senza arrabbiarti.\\n'+difficulty;
+else advice='⭐ PIANO DI PARTENZA\\n1. Scegli una sola abilità da allenare oggi.\\n2. Dedica 10 minuti a esercitarti senza fretta.\\n3. Dopo la partita individua un errore e una cosa fatta bene.\\n'+difficulty;
+let gameTip='';
+if(game==='Fortnite')gameTip='\\nSuggerimento Fortnite: cerca copertura prima di curarti o ricaricare e scegli con attenzione quando ingaggiare.';
+else if(game==='Call of Duty')gameTip='\\nSuggerimento Call of Duty: controlla gli angoli, ascolta i passi e non correre sempre nella stessa zona.';
+else if(game==='Brawl Stars')gameTip='\\nSuggerimento Brawl Stars: usa i muri come copertura e conserva la Super per un momento utile.';
+else if(game==='Rocket League')gameTip='\\nSuggerimento Rocket League: torna in posizione dopo il tiro e lascia spazio al compagno.';
+else if(game==='EA Sports FC')gameTip='\\nSuggerimento EA Sports FC: usa passaggi semplici e non mandare fuori posizione tutta la difesa.';
+else if(game==='Minecraft')gameTip='\\nSuggerimento Minecraft: prepara equipaggiamento, cibo e un percorso sicuro prima di esplorare.';
+else if(game==='Roblox')gameTip='\\nSuggerimento Roblox: ogni esperienza è diversa; dimmi il nome della modalità per consigli più precisi.';
+else if(game==='Free Fire'||game==='PUBG Mobile')gameTip='\\nSuggerimento battle royale: scegli bene il punto di atterraggio, raccogli equipaggiamento e spostati usando coperture.';
+else if(game==='Altro')gameTip='\\nDimmi il titolo preciso del gioco per rendere il consiglio più mirato.';
+return 'Per '+game+' – livello '+level+':\\n\\n'+advice+gameTip+'\\n\\nVuoi concentrarti su un errore preciso? Raccontami cosa succede durante una partita.';
+}
+function addMessage(text,kind){
+let chat=document.getElementById('chat');
+let div=document.createElement('div');
+div.className='message'+(kind==='user'?' user':'');
+div.textContent=text;
+chat.appendChild(div);
+chat.scrollTop=chat.scrollHeight;
+}
 function send(){
 let input=document.getElementById('question');
 let q=input.value.trim();
 if(!q)return;
-let chat=document.getElementById('chat');
-chat.innerHTML+='<div class="message user">'+escapeText(q)+'</div>';
-let answer='Allenati con costanza, concentrati su un solo aspetto alla volta e cerca di capire cosa puoi migliorare dopo ogni partita.';
-if(q.toLowerCase().includes('mira'))answer='Per migliorare la mira, fai sessioni brevi di precisione e cerca di mantenere movimenti controllati.';
-if(q.toLowerCase().includes('costru'))answer='Per migliorare le costruzioni, ripeti le tecniche di base lentamente prima di aumentare la velocità.';
-if(q.toLowerCase().includes('vinc'))answer='Per vincere più spesso, cura il posizionamento, osserva gli avversari e non affrontare ogni scontro senza un piano.';
-if(q.toLowerCase().includes('fortnite'))answer='Su Fortnite lavora su mira, costruzioni e posizionamento. Quale di queste abilità ti crea più difficoltà?';
-chat.innerHTML+='<div class="message">🤖 '+answer+'</div>';
+addMessage(q,'user');
+addMessage(coachReply(q),'coach');
 input.value='';
-chat.scrollTop=chat.scrollHeight;
-}
-function escapeText(s){
-let d=document.createElement('div');d.textContent=s;return d.innerHTML;
 }
 function complete(){
-data.sessions++;
-data.minutes+=10;
-data.goals++;
-save();
+data.sessions++;data.minutes+=10;data.goals++;save();
 document.getElementById('trainingResult').textContent='🎉 Allenamento completato! Hai guadagnato 10 minuti di pratica.';
 }
 function resetStats(){
-if(confirm('Vuoi davvero azzerare le statistiche?')){
-data={sessions:0,minutes:0,goals:0};save();
+if(confirm('Vuoi davvero azzerare le statistiche?')){data={sessions:0,minutes:0,goals:0};save()}
 }
-}
-function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
 document.getElementById('game').value=localStorage.getItem('gcgame')||'Fortnite';
 document.getElementById('selected').textContent='Gioco selezionato: '+document.getElementById('game').value;
 update();
 </script>
 </body>
-</html>
-
-
+                                                                                    </html>

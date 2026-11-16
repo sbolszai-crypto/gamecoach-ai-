@@ -1,76 +1,182 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#101426">
-  <title>GAMECOACH AI</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      padding: 24px;
-      font-family: Arial, sans-serif;
-      background: #101426;
-      color: white;
-    }
-    header { text-align: center; margin: 35px 0; }
-    h1 { color: #63e6be; font-size: 32px; }
-    .card {
-      background: #202a43;
-      padding: 20px;
-      border-radius: 16px;
-      margin: 16px 0;
-    }
-    button {
-      background: #63e6be;
-      color: #101426;
-      border: 0;
-      padding: 14px;
-      border-radius: 10px;
-      font-weight: bold;
-      width: 100%;
-      font-size: 16px;
-    }
-    select {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      margin: 12px 0;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1020">
+<title>GAMECOACH AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b1020;color:#f4f6ff;font-family:Arial,sans-serif}
+header{padding:22px;background:#131c32;border-bottom:1px solid #283653;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:22px;font-weight:900;color:#63e6be}
+.logo span{color:white}
+header small{color:#9eacc8}
+main{max-width:1000px;margin:auto;padding:20px}
+.welcome{padding:25px;border-radius:20px;background:linear-gradient(120deg,#193c52,#25305c);margin-bottom:20px}
+h1{font-size:27px;margin:0 0 10px}
+p{color:#bdc8df;line-height:1.5}
+.card{background:#151f35;border:1px solid #293955;border-radius:17px;padding:20px;margin-bottom:17px}
+h2{font-size:19px;margin-top:0}
+select,input{width:100%;padding:14px;border-radius:10px;border:1px solid #40506c;background:#0d1629;color:white;font-size:16px;margin:8px 0}
+button{background:#63e6be;color:#0b1020;border:0;padding:13px 17px;border-radius:10px;font-weight:bold;font-size:15px;cursor:pointer}
+button.secondary{background:#293955;color:white}
+button:active{transform:scale(.98)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.stat{background:#202c45;padding:15px;border-radius:12px}
+.stat strong{font-size:24px;color:#63e6be;display:block}
+.chat{height:210px;overflow:auto;background:#0d1629;border-radius:12px;padding:13px;margin:12px 0}
+.message{padding:10px;margin:7px 0;border-radius:10px;background:#202c45}
+.user{background:#174a47}
+.row{display:flex;gap:8px}
+.row input{min-width:0}
+nav{display:flex;gap:8px;overflow:auto;padding:12px 20px;background:#10182b}
+nav button{white-space:nowrap}
+section{scroll-margin-top:20px}
+footer{text-align:center;color:#71809c;padding:25px;font-size:12px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}main{padding:30px}}
+</style>
 </head>
 <body>
-  <header>
-    <h1>🎮 GAMECOACH AI</h1>
-    <p>Il tuo coach gaming intelligente</p>
-  </header>
+<header>
+<div class="logo">🎮 GAMECOACH <span>AI</span></div>
+<small>YOUR GAMING PARTNER</small>
+</header>
 
-  <div class="card">
-    <h2>🎯 Scegli il tuo gioco</h2>
-    <select id="game">
-      <option>Fortnite</option>
-      <option>Call of Duty</option>
-      <option>Minecraft</option>
-      <option>Brawl Stars</option>
-      <option>Free Fire</option>
-      <option>Altro</option>
-    </select>
-    <button onclick="coach()">Inizia ad allenarti</button>
-  </div>
+<nav>
+<button onclick="go('home')">🏠 Home</button>
+<button class="secondary" onclick="go('coach')">🤖 Coach</button>
+<button class="secondary" onclick="go('training')">🏋️ Training</button>
+<button class="secondary" onclick="go('stats')">📊 Statistiche</button>
+</nav>
 
-  <div class="card">
-    <h2>🤖 AI Coach</h2>
-    <p id="answer">Ciao! Sono il tuo coach. Scegli un gioco per iniziare!</p>
-  </div>
+<main>
+<section id="home">
+<div class="welcome">
+<h1>Diventa un giocatore migliore.</h1>
+<p>Il tuo spazio personale per allenarti, migliorare e vincere.</p>
+<button onclick="go('coach')">Inizia con il coach →</button>
+</div>
 
-  <script>
-    function coach() {
-      const game = document.getElementById("game").value;
-      document.getElementById("answer").textContent =
-        "Benvenuto! Prepariamoci a migliorare su " + game +
-        ". Primo consiglio: allenati con costanza e analizza i tuoi errori!";
-    }
-  </script>
+<div class="card">
+<h2>🎮 Il tuo gioco</h2>
+<select id="game" onchange="saveGame()">
+<option>Fortnite</option>
+<option>Call of Duty</option>
+<option>Brawl Stars</option>
+<option>Free Fire</option>
+<option>Minecraft</option>
+<option>Roblox</option>
+<option>Rocket League</option>
+<option>EA Sports FC</option>
+<option>PUBG Mobile</option>
+<option>Altro</option>
+</select>
+<p id="selected">Gioco selezionato: Fortnite</p>
+</div>
+
+<div class="card">
+<h2>⚡ Il tuo riepilogo</h2>
+<div class="grid">
+<div class="stat"><strong id="sessions">0</strong>Sessioni</div>
+<div class="stat"><strong id="minutes">0</strong>Minuti allenati</div>
+<div class="stat"><strong id="goals">0</strong>Obiettivi</div>
+<div class="stat"><strong>⭐</strong>Livello principiante</div>
+</div>
+</div>
+</section>
+
+<section id="coach" class="card">
+<h2>🤖 AI Coach</h2>
+<p>Scrivi una domanda al tuo coach. Questa prima versione usa consigli integrati, non un'intelligenza artificiale online.</p>
+<div class="chat" id="chat">
+<div class="message">Ciao! Sono GameCoach. Quale abilità vuoi migliorare oggi?</div>
+</div>
+<div class="row">
+<input id="question" placeholder="Es. Come posso migliorare?" onkeydown="if(event.key==='Enter')send()">
+<button onclick="send()">Invia</button>
+</div>
+</section>
+
+<section id="training" class="card">
+<h2>🏋️ Centro allenamento</h2>
+<p>Scegli un esercizio e completa la tua sessione.</p>
+<div class="stat">
+<strong>🎯 10 minuti</strong>
+Allenamento: concentrazione e precisione
+<p>Fai pratica, osserva gli errori e prova a correggerli.</p>
+<button onclick="complete()">Completa allenamento</button>
+</div>
+<p id="trainingResult"></p>
+</section>
+
+<section id="stats" class="card">
+<h2>📊 I tuoi progressi</h2>
+<p>Le tue sessioni vengono salvate su questo dispositivo.</p>
+<div class="grid">
+<div class="stat"><strong id="sessions2">0</strong>Sessioni completate</div>
+<div class="stat"><strong id="minutes2">0</strong>Minuti totali</div>
+</div>
+<button class="secondary" onclick="resetStats()">Azzera statistiche</button>
+</section>
+</main>
+
+<footer>GAMECOACH AI · Prima versione · Progetto personale</footer>
+
+<script>
+let data=JSON.parse(localStorage.getItem('gcdata')||'{"sessions":0,"minutes":0,"goals":0}');
+function save(){
+localStorage.setItem('gcdata',JSON.stringify(data));
+update();
+}
+function update(){
+document.getElementById('sessions').textContent=data.sessions;
+document.getElementById('sessions2').textContent=data.sessions;
+document.getElementById('minutes').textContent=data.minutes;
+document.getElementById('minutes2').textContent=data.minutes;
+document.getElementById('goals').textContent=data.goals;
+}
+function saveGame(){
+let game=document.getElementById('game').value;
+localStorage.setItem('gcgame',game);
+document.getElementById('selected').textContent='Gioco selezionato: '+game;
+}
+function send(){
+let input=document.getElementById('question');
+let q=input.value.trim();
+if(!q)return;
+let chat=document.getElementById('chat');
+chat.innerHTML+='<div class="message user">'+escapeText(q)+'</div>';
+let answer='Allenati con costanza, concentrati su un solo aspetto alla volta e cerca di capire cosa puoi migliorare dopo ogni partita.';
+if(q.toLowerCase().includes('mira'))answer='Per migliorare la mira, fai sessioni brevi di precisione e cerca di mantenere movimenti controllati.';
+if(q.toLowerCase().includes('costru'))answer='Per migliorare le costruzioni, ripeti le tecniche di base lentamente prima di aumentare la velocità.';
+if(q.toLowerCase().includes('vinc'))answer='Per vincere più spesso, cura il posizionamento, osserva gli avversari e non affrontare ogni scontro senza un piano.';
+if(q.toLowerCase().includes('fortnite'))answer='Su Fortnite lavora su mira, costruzioni e posizionamento. Quale di queste abilità ti crea più difficoltà?';
+chat.innerHTML+='<div class="message">🤖 '+answer+'</div>';
+input.value='';
+chat.scrollTop=chat.scrollHeight;
+}
+function escapeText(s){
+let d=document.createElement('div');d.textContent=s;return d.innerHTML;
+}
+function complete(){
+data.sessions++;
+data.minutes+=10;
+data.goals++;
+save();
+document.getElementById('trainingResult').textContent='🎉 Allenamento completato! Hai guadagnato 10 minuti di pratica.';
+}
+function resetStats(){
+if(confirm('Vuoi davvero azzerare le statistiche?')){
+data={sessions:0,minutes:0,goals:0};save();
+}
+}
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+document.getElementById('game').value=localStorage.getItem('gcgame')||'Fortnite';
+document.getElementById('selected').textContent='Gioco selezionato: '+document.getElementById('game').value;
+update();
+</script>
 </body>
-    </html>
+</html>
+
